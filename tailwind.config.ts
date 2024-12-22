@@ -9,9 +9,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#f3efe0",
+        "primary-strong": "#EEE8D3",
+        "secondary-strong": "#EE5879",
+        "secondary": "#F6A2B4",
+        "tertiary-strong": "#517FF6",
+        "tertiary": "#D9E4FC"
       },
+      minHeight: {
+        section: "75svh"
+      }
     },
   },
   plugins: [],
