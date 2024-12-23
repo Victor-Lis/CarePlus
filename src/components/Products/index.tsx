@@ -90,7 +90,7 @@ export default function Products() {
       {products.map((product) => (
         <SwiperSlide
           key={product.id}
-          className="bg-primary-strong border-4 border-primary-strong max-w-72 md:max-w-xs rounded-md py-4 px-4 hover:bg-primary-strong/50 duration-200 cursor-pointer"
+          className="bg-primary-strong border-4 border-primary-strong max-w-40 md:max-w-64 rounded-md py-4 px-4 hover:bg-primary-strong/50 duration-200 cursor-pointer"
         >
           <Product {...product} />
         </SwiperSlide>
