@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/supabase-adapter": "^1.7.4",
     "@emailjs/browser": "^4.4.1",
+    "@supabase/supabase-js": "^2.47.10",
     "aos": "^2.3.4",
     "next": "15.1.0",
+    "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
