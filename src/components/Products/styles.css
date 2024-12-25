@@ -1,0 +1,12 @@
+.swiper {
+  width: calc(100% - 128px);
+  margin: auto;
+  height: 100%;
+  margin-bottom: 4.5rem;
+}
+
+@media not all and (min-width: 768px) {
+  .swiper{
+    width: calc(100% - 64px);
+  }
+}

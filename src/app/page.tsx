@@ -1,9 +1,9 @@
-import Banner from "@/components/app/Banner";
-import Contato from "@/components/app/Contato";
-import Hero from "@/components/app/Hero";
-import MMV from "@/components/app/MMV";
-import Products from "@/components/app/Products";
-import Footer from "@/components/global/Footer"
+import Banner from "@/components/Banner";
+import Contato from "@/components/Contato";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import MMV from "@/components/MMV";
+import Products from "@/components/Products";
 
 export default function Home() {
   return (
