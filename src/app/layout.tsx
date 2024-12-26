@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Quicksand, Dosis } from "next/font/google";
 import "./globals.css";
 
-import Header from "@/components/Header";
+import Header from "@/components/global/Header";
 
 const dosisFont = Dosis({
   variable: "--font-dosis",

@@ -1,8 +1,8 @@
-import { CategoryType } from "@/@types/category";
+import type { CategoryType } from "@/@types/category";
 import { supabase } from "./supabase";
 
 export async function getCategories() {
-  let { data, error } = await supabase.from("categoria").select("*");
+  const { data, error } = await supabase.from("categoria").select("*");
   if (error) {
     console.error(error)  
     return [];

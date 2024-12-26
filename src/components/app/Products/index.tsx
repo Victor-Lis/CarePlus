@@ -15,36 +15,43 @@ import Product from "../Product";
 import type { ProductType } from "@/@types/product";
 
 import "./styles.css"
-import { getProducts } from "@/supabase/getProducts";
+
+import { useProductsStore } from "@/libs/zustand/products";
 
 export default function Products() {
-  const [products, setProducts] = useState<ProductType[]>([])
+  const { products, getProducts } = useProductsStore();
+
+  const [slidesPerWidth, setslidesPerWidth] = useState(1);
 
   useEffect(() => {
-    async function handleGetProducts(){
-      const data = await getProducts()
-      setProducts(data)
-    }
-    
-    handleGetProducts()
-    AOS.init();
+    const getSlidesPerWidth =
+      window.innerWidth > 810
+        ? 3 
+        : window.innerWidth > 610 
+        ? 2
+        : 1
+
+    !products.length ? getProducts() : ''
+    setslidesPerWidth(getSlidesPerWidth);
+    AOS.init()
   }, []);
+
   
   return (
     <Swiper
-      slidesPerView={3}
+      slidesPerView={slidesPerWidth}
       grid={{ rows: 1 }} // Set rows to "auto" for automatic rows
       spaceBetween={30} // Adjust spacing as needed
       pagination={{ clickable: true }}
       modules={[Grid, Pagination]}
       data-aos="fade-down"
       data-aos-duration="500"
-      className="swiper mySwiper pb-4 mb-14 selection:bg-secondary/15"
+      className="swiper mySwiper pb-4 mb-14 selection:bg-secondary/15 flex justify-stretch items-center"
     >
       {products.map((product) => (
         <SwiperSlide
           key={product.id}
-          className="bg-primary-strong border-4 border-primary-strong rounded-md py-4 px-4 hover:bg-primary-strong/50 duration-200 cursor-pointer"
+          className="swiper-slide bg-primary-strong rounded-md py-2 px-4 border-4 border-primary-strong hover:bg-primary-strong/50 duration-200 cursor-pointer max-h-40"
         >
           <Product {...product} />
         </SwiperSlide>

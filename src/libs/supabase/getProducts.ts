@@ -1,8 +1,8 @@
-import { ProductType } from "@/@types/product";
+import type { ProductType } from "@/@types/product";
 import { supabase } from "./supabase";
 
 export async function getProducts() {
-  let { data, error } = await supabase.from("produto").select("*");
+  const { data, error } = await supabase.from("produto").select("*");
   if (error) {
     console.error(error)  
     return [];

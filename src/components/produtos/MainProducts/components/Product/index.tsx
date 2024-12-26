@@ -5,11 +5,11 @@ import Image from "next/image";
 
 import { BsCartPlus } from "react-icons/bs";
 
-export default function Product({ id, image, name, price, url }: ProductType) {
+export default function Product({ id, name, price, image_url }: ProductType) {
   return (
     <div className="w-full min-h-80 flex flex-col justify-center items-center rounded-sm">
       <Image
-        src={Absorvente}
+        src={image_url}
         alt={name}
         className="max-w-40 max-h-max-w-40 mb-2 mt-3"
         width={100}
