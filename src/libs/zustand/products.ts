@@ -12,7 +12,7 @@ export const useProductsStore = create<ProductsStore>((set) => ({
   products: [],
   // setProducts: (products: ProductType[]) => set((state) => ({ products: [...products] })),
   getProducts: async () => {
-    const data = await getProducts()
-    set(() => ({ products: [...data] }))
+    const { products } = await getProducts()
+    set(() => ({ products }))
   }
 }))

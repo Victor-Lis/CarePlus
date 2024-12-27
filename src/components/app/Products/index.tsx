@@ -25,8 +25,10 @@ export default function Products() {
 
   useEffect(() => {
     const getSlidesPerWidth =
-      window.innerWidth > 810
-        ? 3 
+      window.innerWidth > 1000
+        ? 4
+        : window.innerWidth > 810 
+        ? 3
         : window.innerWidth > 610 
         ? 2
         : 1

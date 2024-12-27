@@ -1,13 +1,20 @@
+"use client"
+
 import type { ProductType } from "@/@types/product";
-import { SwiperSlide } from "swiper/react";
-import Absorvente from "@/assets/absorvente-low.png";
 import Image from "next/image";
 
-import { BsCartPlus } from "react-icons/bs";
+import Link from "next/link";
+import { useProductStore } from "@/libs/zustand/product";
 
-export default function Product({ id, name, price, image_url }: ProductType) {
+export default function Product({ id, image_url, name, price, categoria, created_at, description, image_id }: ProductType) {
+  const { setProduct } = useProductStore()
+  
   return (
-    <div className="w-full min-h-80 flex flex-col justify-center items-center rounded-sm">
+    <Link
+      href={`produto/${id}`}
+      onClick={() => setProduct({ id, image_url, name, price, categoria, created_at, description, image_id })}
+      className="w-full min-h-80 flex flex-col justify-center items-center rounded-sm"
+    >
       <Image
         src={image_url}
         alt={name}
@@ -24,6 +31,6 @@ export default function Product({ id, name, price, image_url }: ProductType) {
         size={35}
         className="bg-secondary-strong text-white p-1 rounded absolute bottom-2 right-2"
       /> */}
-    </div>
+    </Link>
   );
 }

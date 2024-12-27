@@ -7,8 +7,8 @@ export default function ButtonSearch() {
   const { categories, inputText } = useFilterStore();
 
   function handleFilter() {
-    console.log(inputText);
-    console.log(categories);
+    //console.log(inputText);
+    //console.log(categories);
   }
 
   return (

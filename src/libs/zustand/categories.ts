@@ -10,7 +10,7 @@ type CategoriesStore = {
 export const useCategoriesStore = create<CategoriesStore>((set) => ({
   categories: [],
   getCategories: async () => {
-    const data = await getCategories()
-    set(() => ({ categories: [...data] }))
+    const { categories } = await getCategories()
+    set(() => ({ categories }))
   }
 }))

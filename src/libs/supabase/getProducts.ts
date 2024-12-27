@@ -5,7 +5,12 @@ export async function getProducts() {
   const { data, error } = await supabase.from("produto").select("*");
   if (error) {
     console.error(error)  
-    return [];
+    return {
+      products: []
+    }
   }
-  return data as unknown as ProductType[];
+
+  return {
+    products: data as unknown as ProductType[]
+  }
 }

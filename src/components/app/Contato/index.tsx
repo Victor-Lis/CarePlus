@@ -31,7 +31,7 @@ export default function Contato() {
       formValues[key] = value as string;
     });
 
-    console.log(formValues);
+    //console.log(formValues);
     emailjs
       .sendForm(process.env.NEXT_PUBLIC_SERVICE_ID as string, process.env.NEXT_PUBLIC_TEMPLATE_ID as string, form.current, {
         publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY as string,

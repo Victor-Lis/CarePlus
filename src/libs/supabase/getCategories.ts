@@ -5,7 +5,11 @@ export async function getCategories() {
   const { data, error } = await supabase.from("categoria").select("*");
   if (error) {
     console.error(error)  
-    return [];
+    return {
+      categories: []
+    }
   }
-  return data as unknown as CategoryType[];
+  return {
+    categories: data as unknown as CategoryType[]
+  }
 }
