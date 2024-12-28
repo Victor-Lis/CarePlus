@@ -32,7 +32,7 @@ export default function ButtonBuy() {
       })
 
       if (message) alert(message)
-      if(status) router.push("/perfil")
+      if(status) router.push("/carrinho")
     }
   }
 
