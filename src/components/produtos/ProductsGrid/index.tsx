@@ -15,7 +15,6 @@ export default function ProductsGrid() {
   }, []);
 
   const filteredProducts = products.filter((product) => {
-    // Combine category and name filtering with logical AND (&&)
     return (
       (!categories.length || !!categories.find((category) => category.id === product.categoria)) &&
       (!inputText.length || product.name.toLowerCase().includes(inputText.toLowerCase()))

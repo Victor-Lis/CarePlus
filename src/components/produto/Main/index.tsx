@@ -5,7 +5,7 @@ import Image from "next/image";
 import ButtonBuy from "../ButtonBuy";
 import PriceBox from "../PriceBox";
 
-export default function Hero({produto}:{produto: ProductType}) {
+export default function Main({produto}:{produto: ProductType}) {
  return (
    <div className="py-2 px-2 min-h-section w-full bg-primary-strong selection:bg-secondary-strong/15 flex justify-center items-center gap-x-28 max-md:flex-col max-md:py-8 max-md:px-8 rounded">
     <div className="min-h-full flex-1 flex justify-center items-center max-md:mt-2">

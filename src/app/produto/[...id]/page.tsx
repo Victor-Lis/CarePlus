@@ -1,10 +1,10 @@
 "use client";
-import { redirect } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useProductStore } from "@/libs/zustand/product";
 import { getProduct } from "@/libs/supabase/getProduct";
-import Hero from "@/components/produto/Hero";
+import Main from "@/components/produto/Main";
 import Products from "@/components/produto/Products";
 import Footer from "@/components/global/Footer";
 
@@ -12,11 +12,12 @@ import { CgSpinner } from "react-icons/cg";
 import Loader from "@/components/global/Loader";
 
 type ProdutoParams = {
-  id: string;
+  id: string
 };
 
-export default function Produto({ params }: { params: ProdutoParams }) {
+export default function Produto() {
   const { product, setProduct } = useProductStore();
+  const params = useParams<ProdutoParams>()
 
   async function handleGetProduct() {
     //console.log(product)
@@ -37,7 +38,7 @@ export default function Produto({ params }: { params: ProdutoParams }) {
   if (product) {
     return (
       <div className="min-h-svh w-full bg-primary px-24 max-md:px-10 pt-16">
-        <Hero produto={product} />
+        <Main produto={product} />
         <Products category_id={product.categoria} />
         <Footer type="primary-strong" />
       </div>
