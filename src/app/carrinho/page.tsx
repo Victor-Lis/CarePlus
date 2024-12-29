@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import ItemsList from "@/components/carrinho/ItemsList";
 import FinalPrice from "@/components/carrinho/FinalPrice";
