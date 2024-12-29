@@ -3,16 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import ButtonExclude from "../ButtonExclude";
 
-interface ItemProps extends FormattedCartItemType {
-  email: string;
-}
-
 export default function Item({
   amount,
   final_price,
   produto,
   id,
-  email,
 }: FormattedCartItemType) {
   return (
     <div className="w-full h-14 flex justify-between items-start border-b-[0.5px] border-b-secondary">
@@ -27,7 +22,7 @@ export default function Item({
         <div className="ml-2 flex flex-col justify-start items-start">
           <h2 className="text-xl text-secondary-strong">{produto.name}</h2>
           <div className="flex justify-start items-center w-full gap-x-3">
-            <ButtonExclude cart_id={id} email={email}/>
+            <ButtonExclude cart_id={id}/>
             <Link href={`${process.env.NEXT_PUBLIC_HOST_URL}/produto/${produto.id}`} className="text-tertiary-strong underline">
               Adicionar Mais
             </Link>

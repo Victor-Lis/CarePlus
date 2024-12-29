@@ -3,10 +3,11 @@
 import { deleteProductsInCart } from "@/libs/supabase/deleteProductInCart";
 import { useProductsStore } from "@/libs/zustand/products";
 import { useProductsInCartStore } from "@/libs/zustand/productsInCart";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function ButtonExclude({cart_id, email}:{cart_id: string, email: string}) {
-
+export default function ButtonExclude({cart_id}:{cart_id: string}) {
+  const { data: session, status } = useSession();
   const router = useRouter()
 
   const { getProductsInCartByEmail } = useProductsInCartStore();
@@ -16,7 +17,7 @@ export default function ButtonExclude({cart_id, email}:{cart_id: string, email: 
     const { status } = await deleteProductsInCart({cart_id})
     if(status) {
       await getProducts();
-      await getProductsInCartByEmail(email);
+      await getProductsInCartByEmail(session?.user?.email as string);
       router.push("/produtos")
     }
   }
