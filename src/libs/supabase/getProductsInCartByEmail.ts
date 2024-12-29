@@ -1,5 +1,4 @@
-
-import type { CartItemType } from "@/@types/cart";
+import type { CartItemType } from "@/@types/cartItemType";
 import { supabase } from "./supabase";
 
 type getProductsInCartByEmailProps = {

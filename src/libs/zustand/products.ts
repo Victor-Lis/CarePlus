@@ -5,7 +5,7 @@ import { getProducts } from '../supabase/getProducts';
 type ProductsStore = {
   products: ProductType[]
   // setProducts: (products: ProductType[]) => void,
-  getProducts: () => Promise<void>;
+  getProducts: () => Promise<boolean>;
 }
 
 export const useProductsStore = create<ProductsStore>((set) => ({
@@ -14,5 +14,6 @@ export const useProductsStore = create<ProductsStore>((set) => ({
   getProducts: async () => {
     const { products } = await getProducts()
     set(() => ({ products }))
+    return true
   }
 }))

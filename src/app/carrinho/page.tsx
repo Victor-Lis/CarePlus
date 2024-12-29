@@ -1,35 +1,35 @@
 "use client";
 
-import { useProductsInCartStore } from "@/libs/zustand/productsInCart";
-import { useProductsStore } from "@/libs/zustand/products";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-export default function Carrinho() {
-  const { data: session } = useSession();
+import ItemsList from "@/components/carrinho/ItemsList";
+import FinalPrice from "@/components/carrinho/FinalPrice";
+import { useFormattedProductsStore } from "@/libs/zustand/formattedProducts";
 
-  const { getProductsInCartByEmail, productsInCart } = useProductsInCartStore();
-  const { products, getProducts } = useProductsStore();
+export default function Carrinho() {
+  const { data: session, status } = useSession();
+
+  const { formattedProducts, getFormattedProducts } = useFormattedProductsStore()
 
   useEffect(() => {
     async function handleGetProducts() {
-      const email = await session?.user?.email;
-      !email ? await signIn() : await getProductsInCartByEmail(email);
+      if (status === "loading") return;
+      const email = session?.user?.email;
+      if (!email) {
+        await signIn();
+      } else {
+        await getFormattedProducts(email)
+      }
     }
 
-    getProducts();
     handleGetProducts();
-  }, [session?.user?.email]);
-
-  const filteredProducts = products.filter((product) => {
-    return !!productsInCart?.find((prod) => prod.id === product.categoria);
-  });
+  }, [session?.user?.email, status]);
 
   return (
     <div className="min-h-svh w-full bg-primary px-24 max-md:px-10 pt-16">
-      {filteredProducts.map((product) => (
-        <h2 key={product.id}>{product.name}</h2>
-      ))}
+      {status !== "authenticated" ? <ItemsList /> : <div className="w-full min-h-section bg-primary-strong selection:bg-secondary-strong/15 px-6 py-5 flex flex-col gap-y-5 rounded-tl rounded-tr border-x-4 border-t-4 border-primary-strong"></div>}
+      <FinalPrice />
     </div>
   );
 }

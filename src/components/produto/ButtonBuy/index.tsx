@@ -10,10 +10,12 @@ import { useProductStore } from "@/libs/zustand/product";
 import { LuMinus, LuPlus } from "react-icons/lu";
 import { insertProductInCart } from "@/libs/supabase/insertProductInCart";
 import { useRouter } from "next/navigation";
+import { useProductsInCartStore } from "@/libs/zustand/productsInCart";
 
 export default function ButtonBuy() {
 
   const { product, amount, addAmount, reduceAmount, resetAmount } = useProductStore()
+  const { getProductsInCartByEmail } = useProductsInCartStore();
 
   const { data: session } = useSession()
   const router = useRouter()
@@ -31,8 +33,9 @@ export default function ButtonBuy() {
         user_email: user.email 
       })
 
-      if (message) alert(message)
-      if(status) router.push("/carrinho")
+      const refresh = await getProductsInCartByEmail(user.email)
+      if (message && refresh) alert(message)
+      if (refresh) router.push("/carrinho")
     }
   }
 
