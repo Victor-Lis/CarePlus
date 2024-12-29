@@ -10,7 +10,7 @@ import { useFormattedProductsStore } from "@/libs/zustand/formattedProducts";
 export default function Carrinho() {
   const { data: session, status } = useSession();
 
-  const { formattedProducts, getFormattedProducts } = useFormattedProductsStore()
+  const { getFormattedProducts } = useFormattedProductsStore()
 
   useEffect(() => {
     async function handleGetProducts() {
