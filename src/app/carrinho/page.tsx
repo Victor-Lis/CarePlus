@@ -28,7 +28,7 @@ export default function Carrinho() {
 
   return (
     <div className="min-h-svh w-full bg-primary px-24 max-md:px-10 pt-16">
-      {status !== "authenticated" ? <ItemsList /> : <div className="w-full min-h-section bg-primary-strong selection:bg-secondary-strong/15 px-6 py-5 flex flex-col gap-y-5 rounded-tl rounded-tr border-x-4 border-t-4 border-primary-strong"></div>}
+      {status === "authenticated" ? <ItemsList /> : <div className="w-full min-h-section bg-primary-strong selection:bg-secondary-strong/15 px-6 py-5 flex flex-col gap-y-5 rounded-tl rounded-tr border-x-4 border-t-4 border-primary-strong"></div>}
       <FinalPrice />
     </div>
   );
