@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import ItemsList from "@/components/carrinho/ItemsList";
 import FinalPrice from "@/components/carrinho/FinalPrice";
 import { useFormattedProductsStore } from "@/libs/zustand/formattedProducts";
+import Disclaimer from "@/components/carrinho/Disclaimer";
+import Footer from "@/components/global/Footer";
 
 export default function Carrinho() {
   const { data: session, status } = useSession();
@@ -27,9 +29,11 @@ export default function Carrinho() {
   }, [session?.user?.email, status]);
 
   return (
-    <div className="min-h-svh w-full bg-primary px-24 max-md:px-10 pt-16">
+    <div className="min-h-svh w-full bg-primary px-24 max-md:px-5 pt-16">
       {status === "authenticated" ? <ItemsList /> : <div className="w-full min-h-section bg-primary-strong selection:bg-secondary-strong/15 px-6 py-5 flex flex-col gap-y-5 rounded-tl rounded-tr border-x-4 border-t-4 border-primary-strong"></div>}
       <FinalPrice />
+      <Disclaimer />
+      <Footer type="primary-strong"/>
     </div>
   );
 }

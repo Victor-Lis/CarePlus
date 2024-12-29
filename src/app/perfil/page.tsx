@@ -1,16 +1,16 @@
 "use client"
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import Loader from "@/components/global/Loader";
+import NoSignIn from "@/components/perfil/NoSignIn";
+import WithSignIn from "@/components/perfil/WithSignIn";
+import { useSession } from "next-auth/react";
 
 export default function perfil() {
-
-  async function handleSignOut(){
-    await signOut()
-  }
+  const { data: session, status } = useSession();
 
  return (
-  <div className="min-h-svh w-full bg-primary flex flex-col justify-between">
-    <button type="button" onClick={handleSignOut}> Sair </button>
+  <div>
+    {status === "loading" ? <Loader/> : session?.user?.email ? <WithSignIn/> : <NoSignIn/>}
   </div>
  );
 }

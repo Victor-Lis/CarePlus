@@ -10,7 +10,7 @@ export default function Item({
   id,
 }: FormattedCartItemType) {
   return (
-    <div className="w-full h-14 flex justify-between items-start border-b-[0.5px] border-b-secondary">
+    <div className="w-full min-h-14 flex max-sm:flex-col justify-between items-start max-sm:items-center gap-y-2 border-b-[0.5px] border-b-secondary">
       <div className="flex justify-start items-start">
         <Image
           alt={produto.name}
@@ -24,7 +24,7 @@ export default function Item({
           <div className="flex justify-start items-center w-full gap-x-3">
             <ButtonExclude cart_id={id}/>
             <Link href={`${process.env.NEXT_PUBLIC_HOST_URL}/produto/${produto.id}`} className="text-tertiary-strong underline">
-              Adicionar Mais
+              Adicionar
             </Link>
           </div>
         </div>
