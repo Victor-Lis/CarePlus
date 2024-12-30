@@ -1,4 +1,4 @@
-# Care+ 💖
+<h1>Care+ 💖</h1>h1>
 
 ## Resumo 📋
 O projeto "Care+ (CarePlus)" surgiu a partir de um desafio técnico que me propus a desevolver, onde havia a opção de construir um entre os dois seguintes projetos:
@@ -6,6 +6,8 @@ O projeto "Care+ (CarePlus)" surgiu a partir de um desafio técnico que me propu
 - 2 - 🔧 API REST - Sistema de Chamados ✖️
 
 Embora já tenha desenvolvido os mais variados projetos nas mais distintas stacks, tenho uma preferência pela construção de aplicações web, portanto, escolhi a opção 1. 
+
+https://github.com/user-attachments/assets/a259911a-c162-4fd5-8009-3485f16fa84f
 
 <br>
 
@@ -20,6 +22,7 @@ Embora já tenha desenvolvido os mais variados projetos nas mais distintas stack
   <img align="center" alt="Swiper" width="35" height="35" src="https://github.com/devicons/devicon/blob/master/icons/swiper/swiper-original.svg">
   <img align="center" alt="Tailwind" width="65" height="35" src="https://github.com/devicons/devicon/blob/master/icons/tailwindcss/tailwindcss-original-wordmark.svg">
 </div>
+##
 
 <br>
 <br>
@@ -66,6 +69,8 @@ Construí a aplicação buscando trazer uma sensação de leveza e conforto para
 | Sour Gummy       | [Google Fonts](https://fonts.google.com/specimen/Sour+Gummy?query=Sour+Gummy) |
 
 <br>
+
+
 
 # Autores 🧑‍💼
 - [@Victor-Lis](https://www.linkedin.com/in/victor-lis-bronzo)
