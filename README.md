@@ -52,18 +52,16 @@ A Care+ é apenas uma empresa fictícia, sendo assim não é uma empresa real, c
 Construí a aplicação buscando trazer uma sensação de leveza e conforto para os usuários com foco no público alvo feminino, para isso apliquei alguns dos conceitos relacionados a design e tipografia que aprendi durante minha leitura do livro ["Design pra quem não é designer"](https://www.linkedin.com/posts/victor-lis-bronzo_ol%C3%A1-rede-hoje-vim-compartilhar-uma-experi%C3%AAncia-activity-7274045545764044800-CeAs?utm_source=share&utm_medium=member_desktop).
 
 ### Cores
-
 | Cor               | Hexadecimal                                                |
 | ----------------- | ---------------------------------------------------------------- |
-| Primary        | ![#F3EFE0](https://via.placeholder.com/10/f3efe0?text=+) #f3efe0 |
-| Primary Strong       | ![#EEE8D3](https://via.placeholder.com/10/EEE8D3?text=+) #EEE8D3 |
-| Secondary       | ![#F6A2B4](https://via.placeholder.com/10/F6A2B4?text=+) #F6A2B4 |
-| Secondary Strong       | ![#F6A2B4](https://via.placeholder.com/10/EE5879?text=+) #EE5879 |
-| Tertiary       | ![#D9E4FC](https://via.placeholder.com/10/D9E4FC?text=+) #D9E4FC |
-| Tertiary Strong       | ![#517FF6](https://via.placeholder.com/10/517FF6?text=+) #517FF6 |
+| Primary |  ![#F3EFE0](https://via.placeholder.com/10/f3efe0?text=+) #f3efe0 |
+| Primary Strong |  ![#EEE8D3](https://via.placeholder.com/10/EEE8D3?text=+) #EEE8D3 |
+| Secondary |  ![#F6A2B4](https://via.placeholder.com/10/F6A2B4?text=+) #F6A2B4 |
+| Secondary Strong |  ![#EE5879](https://via.placeholder.com/10/EE5879?text=+) #EE5879 |
+| Tertiary |  ![#D9E4FC](https://via.placeholder.com/10/D9E4FC?text=+) #D9E4FC |
+| Tertiary Strong |  ![#517FF6](https://via.placeholder.com/10/517FF6?text=+) #517FF6 |
 
 ### Fontes
-
 | Fonte               | Link                                                |
 | ----------------- | ---------------------------------------------------------------- |
 | Dosis        | [Google Fonts](https://fonts.google.com/specimen/Dosis?query=dosis) |
