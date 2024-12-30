@@ -1,4 +1,15 @@
-# Care+
+# Care+ 💖
+## Techs 🛠
+<div align="center" style="display: inline_block">
+  <img align="center" alt="TypeScript" height="35" width="45" src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg">
+  <img align="center" alt="React" height="35" width="45" src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg">
+  <img align="center" alt="NextJS" height="35" width="45" src="https://github.com/devicons/devicon/blob/master/icons/nextjs/nextjs-original-wordmark.svg">
+  <img align="center" alt="Node.js" height="35" width="45" src="https://github.com/devicons/devicon/blob/master/icons/nodejs/nodejs-original.svg">
+  <img align="center" alt="Next Auth" height="35" width="45" src="https://next-auth.js.org/img/logo/logo-xs.png">
+  <img align="center" alt="Supabase" height="35" width="45" src="https://github.com/devicons/devicon/blob/master/icons/supabase/supabase-plain.svg">
+  <img align="center" alt="Zustand" width="35" height="35" src="https://github.com/pmndrs/zustand/raw/main/docs/favicon.ico">
+  <img align="center" alt="Tailwind" width="35" height="35" src="https://github.com/devicons/devicon/blob/master/icons/tailwindcss/tailwindcss-original.svg">
+</div>
 
-## Autores
+## Autores 🧑‍💼
 - [@Victor-Lis](https://www.linkedin.com/in/victor-lis-bronzo)
