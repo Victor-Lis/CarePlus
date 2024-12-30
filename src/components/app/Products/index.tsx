@@ -21,7 +21,7 @@ import { useProductsStore } from "@/libs/zustand/products";
 export default function Products() {
   const { products, getProducts } = useProductsStore();
 
-  const [slidesPerWidth, setslidesPerWidth] = useState(1);
+  const [slidesPerWidth, setSlidesPerWidth] = useState(1);
 
   useEffect(() => {
     const getSlidesPerWidth =
@@ -34,10 +34,11 @@ export default function Products() {
         : 1
 
     !products.length ? getProducts() : ''
-    setslidesPerWidth(getSlidesPerWidth);
+    setSlidesPerWidth(getSlidesPerWidth);
     AOS.init()
   }, []);
 
+  const randomStartIndex = Math.floor(Math.random() * (products.length - 5));
   
   return (
     <Swiper
@@ -50,7 +51,7 @@ export default function Products() {
       data-aos-duration="500"
       className="swiper mySwiper pb-4 mb-14 selection:bg-secondary/15 flex justify-stretch items-center"
     >
-      {products.map((product) => (
+      {products.slice(randomStartIndex, randomStartIndex + 5).map((product) => (
         <SwiperSlide
           key={product.id}
           className="swiper-slide bg-primary-strong rounded-md py-2 px-4 border-4 border-primary-strong hover:bg-primary-strong/50 duration-200 cursor-pointer max-h-40"

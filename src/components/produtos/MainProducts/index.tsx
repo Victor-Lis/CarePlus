@@ -36,6 +36,8 @@ export default function MainProducts() {
     setslidesPerWidth(getSlidesPerWidth);
   }, []);
 
+  const randomStartIndex = Math.floor(Math.random() * (products.length -3));
+
   return (
     <div>
       <Swiper
@@ -47,7 +49,7 @@ export default function MainProducts() {
         modules={[Pagination]}
         className="mySwiper selection:bg-secondary/15 min-h-80 mt-4"
       >
-        {products.map((product) => (
+        {products.slice(randomStartIndex, randomStartIndex + 3).map((product) => (
           <SwiperSlide
             key={product.id}
             className="min-h-full bg-tertiary/55 rounded-md py-4 px-4 border-4 border-tertiary/55 hover:bg-tertiary/35 duration-200 cursor-pointer"
