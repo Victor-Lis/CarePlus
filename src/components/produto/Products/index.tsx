@@ -13,7 +13,7 @@ import "./styles.css";
 
 import { useProductsStore } from "@/libs/zustand/products";
 
-export default function Products({ category_id }: { category_id: string }) {
+export default function Products({ category_id, product_id }: { category_id: string, product_id: string }) {
   const { products, getProducts } = useProductsStore();
 
   const [slidesPerWidth, setslidesPerWidth] = useState(1);
@@ -44,7 +44,7 @@ export default function Products({ category_id }: { category_id: string }) {
         className="mySwiper pb-4 mb-6 selection:bg-secondary/15 flex justify-stretch items-center w-full"
       >
         {products.map((product) => {
-          if (product.categoria === category_id) {
+          if (product.categoria === category_id && product.id !== product_id) {
             return (
               <SwiperSlide
                 key={product.id}

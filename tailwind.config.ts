@@ -11,8 +11,8 @@ export default {
       colors: {
         primary: "#f3efe0",
         "primary-strong": "#EEE8D3",
-        "secondary-strong": "#EE5879",
         "secondary": "#F6A2B4",
+        "secondary-strong": "#EE5879",
         "tertiary-strong": "#517FF6",
         "tertiary": "#D9E4FC"
       },

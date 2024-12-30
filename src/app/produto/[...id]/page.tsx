@@ -39,7 +39,7 @@ export default function Produto() {
     return (
       <div className="min-h-svh w-full bg-primary px-24 max-md:px-10 pt-16">
         <Main produto={product} />
-        <Products category_id={product.categoria} />
+        <Products category_id={product.categoria} product_id={product.id} />
         <Footer type="primary-strong" />
       </div>
     );

@@ -22,7 +22,7 @@ export default function ProductsGrid() {
   });
 
   return (
-    <div className="w-full px-16 max-[850px]:px-8 max-sm:px-2 py-4 min-[850px]:py-2.5 grid min-[1125px]:grid-cols-6 min-[800px]:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 max-sm:grid-cols-2 max-[400px]:grid-cols-1 justify-between content-center items-center gap-1.5">
+    <div className="w-full px-16 max-[850px]:px-8 max-sm:px-2 py-4 min-[850px]:py-2.5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 justify-start content-start items-start gap-4">
       {filteredProducts.map((produto) => {
         return <Product key={produto.id} {...produto} />;
       })}

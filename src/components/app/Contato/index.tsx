@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
@@ -14,7 +14,18 @@ interface FormRefCurrentType {
 
 export default function Contato() {
   const form = useRef<HTMLFormElement | null>(null);
+
+  const [name, setName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [message, setMessage] = useState<string>('')
+
   const router = useRouter()
+
+  function clearForm(){
+    setName('')
+    setEmail('')
+    setMessage('')
+  }
 
   function sendEmail(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -22,6 +33,11 @@ export default function Contato() {
     if (!form.current) {
       console.error("Form element not found");
       return;
+    }
+
+    if (!name || !email || !message) {
+      alert("Preencha os campos para entrar em contato!")
+      return
     }
 
     const formData = new FormData(form.current);
@@ -40,10 +56,12 @@ export default function Contato() {
       .then(() => {
         alert("Contato realizado!")
         form?.current?.reset();
+        clearForm()
       })
       .catch((error) => {
         alert("Erro ao realizar contato, tente novamente...")
         form?.current?.reset();
+        clearForm()
         console.error(error)
       });
   }
@@ -59,10 +77,10 @@ export default function Contato() {
         Entre em contato, <br /> basta preencher o formulário!
       </h2>
       <form className="h-full min-w-72 w-72 md:w-96 flex flex-col items-start justify-start gap-y-4" ref={form} onSubmit={sendEmail}>
-        <input className="bg-white px-2 py-1 md:px-4 md:py-2 w-full rounded-sm outline-none border-2 border-white" placeholder="Nome" name="name"/>
-        <input className="bg-white px-2 py-1 md:px-4 md:py-2 w-full rounded-sm outline-none border-2 border-white" placeholder="Email" name="email"/>
+        <input className="bg-white px-2 py-1 md:px-4 md:py-2 w-full rounded-sm outline-none border-2 border-white" placeholder="Nome" name="name" value={name} onChange={(e) => setName(e.target.value)}/>
+        <input className="bg-white px-2 py-1 md:px-4 md:py-2 w-full rounded-sm outline-none border-2 border-white" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
         {/* <input className="bg-white px-4 py-2 w-full rounded-sm outline-none border-2 border-white" placeholder="Assunto" name="subject"/> */}
-        <textarea className="bg-white px-2 md:px-4 md:py-1 w-full rounded-sm outline-none border-2 border-t-8 border-b-8 border-white resize-none" placeholder="Mensagem" name="message"/>
+        <textarea className="bg-white px-2 md:px-4 md:py-1 w-full rounded-sm outline-none border-2 border-t-8 border-b-8 border-white resize-none" placeholder="Mensagem" name="message" value={message} onChange={(e) => setMessage(e.target.value)}/>
         <button type="submit" className="bg-tertiary-strong border-2 border-tertiary-strong px-4 py-1 md:px-8 md:py-2 rounded-sm text-white ml-auto hover:bg-tertiary-strong/75 duration-150">Enviar!</button>
       </form>
     </div>
