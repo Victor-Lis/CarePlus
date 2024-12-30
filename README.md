@@ -390,6 +390,8 @@ SELECT json_agg(f.*)::JSONB
 FROM FormattedCart f;
 ```
 
+<br>
+
 #### Criando função que conecta ao Supabase - src/lib/supabase/getCartUserProduts.ts
 ```ts
 import { supabase } from "./supabase";
@@ -402,6 +404,8 @@ export async function getUserCartProducts({ email }: { email: string }) {
   return !!data ? data : []
 }
 ``` 
+
+<br>
 
 #### Chamando função que armazena os dados no Storage do Zustand - src/lib/zustand/productsInCart.ts
 ```ts
@@ -429,6 +433,9 @@ export const useFormattedProductsStore = create<FormattedProductsStore>(
 );
 ``` 
 Com isso de maneira fácil consigo os dados formatados e prontos para serem utilizados! 
+
+<br>
+<br>
 
 ### Perfil - /perfil 👥
 A rota realiza um reajuste de acordo com a sessão do user, se o usuário não estiver logado a página exibe um componente que pede o login dele, se estiver logado são exibidos seus dados. Mesmo não sendo uma funcionalidade exclusiva dessa rota, é destacável o uso do [Next-Auth](https://next-auth.js.org/) para permitir uma integração segura, robusta e fácil com os mais diversos modelos de OAuth 2.0, o escolhido para o caso foi o mais comum e presente no dia a dia das pessoas hoje em dia, o Google OAuth.
