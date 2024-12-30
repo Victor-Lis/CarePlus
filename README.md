@@ -76,7 +76,7 @@ Rota inicial da aplicação, cumpre os principais requisitos da vaga, contendo v
 
 https://github.com/user-attachments/assets/a8a7cbab-7f33-4754-bc0c-7bcd3b4e0e01
 
-#### Contato
+#### Contato 📧
 Sua principal funcionalidade é no formulário de contato, através da biblioteca "EmailJS" é enviado um email para o endereço victorlisbronzo1@gmail.com, meu email, com as informações da pessoa e sua mensagem.
 
 A construção desse foi bem simples, a "grande" dificuldade foi realizar as devidas configurações no [site do EmailJS](https://dashboard.emailjs.com/sign-in), depois disso bastou criar a função abaixo:
@@ -133,6 +133,131 @@ A construção desse foi bem simples, a "grande" dificuldade foi realizar as dev
   }
 ```
 Com isso as informações do forms, também configuradas no site, conseguem ser lidas e então enviadas ao meu email!
+
+### Produtos - /produtos 🛍
+A tela produtos tem como sua principal função tornar fácil para o usuário encontrar todos os produtos em um único lugar, incluindo inclusive um mecanismo de pesquisa e de filtro, para tornar mais ágil o processo de encontrar o produto desejado
+
+https://github.com/user-attachments/assets/08022bc8-206b-4ff8-98cd-847f80fcd2fa
+
+#### Filtro e Pesquisa 🔍
+O código a ser destacado aqui nessa tela pode ser dividido em 2 que se destacam, com o primeiro sendo o mecanismo de pesquisa, que com o Zustand possibilita uma pesquisa rápida, sem delay e agradável para o usuário.
+
+Com o uso do Zustand os componentes tem suas funções mais "nichadas", deixando o código mais limpo, seria com utilizar um Context ou o Redux, mas com mais desempenho, sendo assim é possível conectar vários componentes sem o "Apocalipse de Props"
+
+##### FilterStore - Zustand 🐻
+```ts
+import type { CategoryType } from '@/@types/category'
+import { create } from 'zustand'
+
+type FilterStore = {
+  categories: CategoryType[]
+  addCategory: (category: CategoryType) => void
+  removeCategory: (category: CategoryType) => void
+  inputText: string,
+  updateInputText: (text: string) => void,
+}
+
+export const useFilterStore = create<FilterStore>((set) => ({
+  categories: [],
+  addCategory: (category: CategoryType) => set((state) => ({
+    categories: [ ...state.categories, category ]
+  })),
+  removeCategory: (category: CategoryType) => set((state) => ({
+    categories: state.categories.filter((cat) => cat.id !== category.id)
+  })),
+  inputText: "",
+  updateInputText: (text: string) => set(() => ({inputText: text}))
+}))
+```
+
+##### Input de Pesquisa
+```ts
+export default function InputFilter() {
+  const { updateInputText, inputText } = useFilterStore();
+
+  return (
+    <input
+      className="bg-white px-2 py-1 min-[850px]:px-4 min-[850px]:py-2 rounded-sm outline-none border-2 border-white flex-[4]"
+      placeholder="Produto"
+      name="product"
+      onChange={(e) => updateInputText(e.target.value)}
+      value={inputText}
+    />
+  );
+}
+```
+
+##### CheckBox Component
+```ts
+export default function CategoryCheckbox({ category }:{ category: CategoryType }) {
+  const { categories, addCategory, removeCategory } = useFilterStore()
+
+  const [checked, setChecked] = useState<boolean>(false)
+
+  const toggleChecked = () => { 
+    setChecked(!checked)
+  }
+
+  function handleChange(){
+    if(checked){
+      addCategory(category)
+    } else {
+      removeCategory(category)
+    }
+  }
+
+  useEffect(() => {
+    function isAlreadyChecked(){
+      categories.find((cat) => cat.id === category.id) ? setChecked(true) : ''
+    }
+    isAlreadyChecked()
+  }, [])
+
+  useEffect(() => { handleChange() }, [checked])
+
+  return (
+    <div className="flex justify-start items-center" key={category.name}>
+      <button
+        type="button"
+        className="p-0.5 mr-1 cursor-pointer flex justify-center items-center"
+        onClick={toggleChecked}
+      >
+        {checked ? <LuCheck size={20} color="#517FF6"/> : <MdOutlineCheckBoxOutlineBlank size={20} color="#517FF6"/>}
+      </button>
+      <h2 className="text-tertiary-strong">{category.name}</h2>
+    </div>
+  );
+}
+```
+
+Após os componentes anteriores definirem os filtros no store do Zustand, basta mapear os items que se adequam aos filtros
+```ts
+export default function ProductsGrid() {
+  const { products, getProducts } = useProductsStore();
+  const { categories, inputText } = useFilterStore();
+
+  useEffect(() => {
+    !products.length ? getProducts() : "";
+  }, []);
+
+  const filteredProducts = products.filter((product) => {
+    return (
+      (!categories.length || !!categories.find((category) => category.id === product.categoria)) &&
+      (!inputText.length || product.name.toLowerCase().includes(inputText.toLowerCase()))
+    )
+  });
+
+  return (
+    <div className="w-full px-16 max-[850px]:px-8 max-sm:px-2 py-4 min-[850px]:py-2.5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 justify-start content-start items-start gap-4">
+      {filteredProducts.map((produto) => {
+        return <Product key={produto.id} {...produto} />;
+      })}
+    </div>
+  );
+}
+```
+
+
 
 # Autores 🧑‍💼
 - [@Victor-Lis](https://www.linkedin.com/in/victor-lis-bronzo)
