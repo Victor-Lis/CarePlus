@@ -86,6 +86,8 @@ A construção desse foi bem simples, a "grande" dificuldade foi realizar as dev
   <img alt="Configurações 2" src="https://github.com/user-attachments/assets/4294353a-7316-4830-a848-e51ccb74d5e4">
 </div>
 
+<br>
+
 #### Código
 ```ts
   // Importação:
@@ -134,10 +136,15 @@ A construção desse foi bem simples, a "grande" dificuldade foi realizar as dev
 ```
 Com isso as informações do forms, também configuradas no site, conseguem ser lidas e então enviadas ao meu email!
 
+<br>
+<br>
+
 ### Produtos - /produtos 🛍
 A tela produtos tem como sua principal função tornar fácil para o usuário encontrar todos os produtos em um único lugar, incluindo inclusive um mecanismo de pesquisa e de filtro, para tornar mais ágil o processo de encontrar o produto desejado
 
 https://github.com/user-attachments/assets/08022bc8-206b-4ff8-98cd-847f80fcd2fa
+
+<br>
 
 #### Filtro e Pesquisa 🔍
 O código a ser destacado aqui nessa tela pode ser dividido em 2 que se destacam, com o primeiro sendo o mecanismo de pesquisa, que com o Zustand possibilita uma pesquisa rápida, sem delay e agradável para o usuário.
@@ -170,6 +177,8 @@ export const useFilterStore = create<FilterStore>((set) => ({
 }))
 ```
 
+<br>
+
 ##### Input de Pesquisa
 ```ts
 export default function InputFilter() {
@@ -186,6 +195,8 @@ export default function InputFilter() {
   );
 }
 ```
+
+<br>
 
 ##### CheckBox Component
 ```ts
@@ -230,6 +241,8 @@ export default function CategoryCheckbox({ category }:{ category: CategoryType }
 }
 ```
 
+<br>
+
 Após os componentes anteriores definirem os filtros no store do Zustand, basta mapear os items que se adequam aos filtros
 ```ts
 export default function ProductsGrid() {
@@ -257,6 +270,63 @@ export default function ProductsGrid() {
 }
 ```
 
+<br>
+<br>
+
+### Produto - /produto/[...id] 📦
+Essa tela visualmente falando é uma das mais simples, porém por de trás de seu devido funcionamento utilizei um recurso muito interessante interligando o funcionamento base do NextJS, com o React Router por debaixo dos panos do framework, e o uso do Zustand, para garantir que a experiência do usuário seja fluida e prazerosa!
+
+https://github.com/user-attachments/assets/781f6f7f-0e8b-4f31-a13b-14ba3ef09513
+
+#### Zustand && [...id] 
+Afinal, qual foi a estratégia utilizada para obter um tempo de resposta ainda mais rápido a adaptável para o usuário? 
+
+Com o **Zustand** é possível **acessar rapidamente dados armazenados** durante a execução da aplicação, ou seja, se o usuário já estiver no site e clicar em um produto, aquele produto já está pre-carregado e com isso se torna quase instantâneo o processo de construção da tela daquele produto puxando seus valores. 
+
+Entretando, em **qualquer site/e-commerce que se preze** tem a possibilidade de **compartilhar um produto entre os usuários**, e nossa aplicação não poderia ser diferente! 
+
+Afinal, supondo que uma usuária esteja pensando em comprar um produto, mas ainda não tem certeza se vai finalizar a compra e decide **salvar o link**, ou ainda se ela simplesmente quiser **compartilhar com alguém**, o que iria acontecer usando apenas o Zustand? A aplicação não conseguira saber qual foi o produto escolhido, afinal não teria o "id" (Parâmetro da URL), a única forma de acessar o produto seria através da navegação do usuário pela aplicação e então clique nesse. 
+
+Porém pegar o produto usando apenas o **"id" via parâmetro da URL seria um desperdício**, pois o **Zustand já está com os dados disponiveis** para uso (sem nem precisar carregar esses em um modelo SSR para otimizar).
+
+Qual foi a solução então? **Implementar os 2 recursos**
+
+Mas como? A aplicação de maneira inteligente consegue discernir entre qual forma puxar dados utilizar, caso o produto em cache no Zustand seja nulo(null), significa que o usuário entrou via link diretamente naquela tela e não há dados em cache, portanto, a tela precisará puxar os dados diretamente da database, se o produto em cache estiver presente, basta utilizar!
+
+Segue o código desse trecho
+```ts
+export default function Produto() {
+  const { product, setProduct } = useProductStore();
+  const params = useParams<ProdutoParams>()
+
+  async function handleGetProduct() {
+    if (!product) {
+      const { id } = await params;
+      if (!id) redirect("/");
+
+      const { product } = await getProduct({ id });
+      if (!product) redirect("/");
+      setProduct(product);
+    }
+  }
+
+  useEffect(() => {
+    handleGetProduct();
+  }, []);
+
+  if (product) {
+    return (
+      <div className="min-h-svh w-full bg-primary px-24 max-md:px-10 pt-16">
+        <Main produto={product} />
+        <Products category_id={product.categoria} product_id={product.id} />
+        <Footer type="primary-strong" />
+      </div>
+    );
+  }
+
+  return <Loader/>
+}
+```
 
 
 # Autores 🧑‍💼
