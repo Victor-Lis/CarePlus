@@ -1,5 +1,14 @@
 # Care+ 💖
 
+## Resumo 📋
+O projeto "Care+ (CarePlus)" surgiu a partir de um desafio técnico que me propus a desevolver, onde havia a opção de construir um entre os dois seguintes projetos:
+- 1 - 🎨 Landing Page - Empresa de Absorventes ✔️
+- 2 - 🔧 API REST - Sistema de Chamados ✖️
+
+Embora já tenha desenvolvido os mais variados projetos nas mais distintas stacks, tenho uma preferência pela construção de aplicações web, portanto, escolhi a opção 1. 
+
+<br>
+
 ## Techs 🛠
 <div align="center" style="display: flex">
   <img align="center" alt="TypeScript" width="35" height="35" src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg">
@@ -13,14 +22,6 @@
 </div>
 
 <br>
-
-## Resumo 📋
-O projeto "Care+ (CarePlus)" surgiu a partir de um desafio técnico que me propus a desevolver, onde havia a opção de construir um entre os dois seguintes projetos:
-- 1 - 🎨 Landing Page - Empresa de Absorventes ✔️
-- 2 - 🔧 API REST - Sistema de Chamados ✖️
-
-Embora já tenha desenvolvido os mais variados projetos nas mais distintas stacks, tenho uma preferência pela construção de aplicações web, portanto, escolhi a opção 1. 
-
 <br>
 
 ## O que é a Care+? - História 📜  
