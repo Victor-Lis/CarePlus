@@ -76,10 +76,15 @@ Rota inicial da aplicação, cumpre os principais requisitos da vaga, contendo v
 
 https://github.com/user-attachments/assets/a8a7cbab-7f33-4754-bc0c-7bcd3b4e0e01
 
+<br>
+
 #### Contato 📧
 Sua principal funcionalidade é no formulário de contato, através da biblioteca "EmailJS" é enviado um email para o endereço victorlisbronzo1@gmail.com, meu email, com as informações da pessoa e sua mensagem.
 
-A construção desse foi bem simples, a "grande" dificuldade foi realizar as devidas configurações no [site do EmailJS](https://dashboard.emailjs.com/sign-in), depois disso bastou criar a função abaixo:
+A construção desse foi bem simples, a "grande" dificuldade foi realizar as devidas configurações no [site do EmailJS](https://dashboard.emailjs.com/sign-in), depois disso bastou criar a função abaixo.
+
+<br>
+
 #### Configurações
 <div className="width: 100%; display: flex; justify-content: center; align-items: center;">
   <img alt="Configurações 1" src="https://github.com/user-attachments/assets/c88c3c46-5c29-443f-8805-f327a1066e73">
@@ -150,6 +155,8 @@ https://github.com/user-attachments/assets/08022bc8-206b-4ff8-98cd-847f80fcd2fa
 O código a ser destacado aqui nessa tela pode ser dividido em 2 que se destacam, com o primeiro sendo o mecanismo de pesquisa, que com o Zustand possibilita uma pesquisa rápida, sem delay e agradável para o usuário.
 
 Com o uso do Zustand os componentes tem suas funções mais "nichadas", deixando o código mais limpo, seria com utilizar um Context ou o Redux, mas com mais desempenho, sendo assim é possível conectar vários componentes sem o "Apocalipse de Props"
+
+<br>
 
 ##### FilterStore - Zustand 🐻
 ```ts
@@ -277,6 +284,8 @@ export default function ProductsGrid() {
 Essa tela visualmente falando é uma das mais simples, porém por de trás de seu devido funcionamento utilizei um recurso muito interessante interligando o funcionamento base do NextJS, com o React Router por debaixo dos panos do framework, e o uso do Zustand, para garantir que a experiência do usuário seja fluida e prazerosa!
 
 https://github.com/user-attachments/assets/781f6f7f-0e8b-4f31-a13b-14ba3ef09513
+
+<br>
 
 #### Zustand && [...id] 
 Afinal, qual foi a estratégia utilizada para obter um tempo de resposta ainda mais rápido a adaptável para o usuário? 
