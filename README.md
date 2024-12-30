@@ -1,4 +1,4 @@
-<h1>Care+ 💖</h1>h1>
+<h1>Care+ 💖</h1>
 
 ## Resumo 📋
 O projeto "Care+ (CarePlus)" surgiu a partir de um desafio técnico que me propus a desevolver, onde havia a opção de construir um entre os dois seguintes projetos:
@@ -22,7 +22,6 @@ https://github.com/user-attachments/assets/a259911a-c162-4fd5-8009-3485f16fa84f
   <img align="center" alt="Swiper" width="35" height="35" src="https://github.com/devicons/devicon/blob/master/icons/swiper/swiper-original.svg">
   <img align="center" alt="Tailwind" width="65" height="35" src="https://github.com/devicons/devicon/blob/master/icons/tailwindcss/tailwindcss-original-wordmark.svg">
 </div>
-##
 
 <br>
 <br>
@@ -70,7 +69,70 @@ Construí a aplicação buscando trazer uma sensação de leveza e conforto para
 
 <br>
 
+## Resumo das Páginas
 
+### Home - /home 🏠
+Rota inicial da aplicação, cumpre os principais requisitos da vaga, contendo vagamente a banner, produtos, história da empresa, formulário de contato...
+
+https://github.com/user-attachments/assets/a8a7cbab-7f33-4754-bc0c-7bcd3b4e0e01
+
+#### Contato
+Sua principal funcionalidade é no formulário de contato, através da biblioteca "EmailJS" é enviado um email para o endereço victorlisbronzo1@gmail.com, meu email, com as informações da pessoa e sua mensagem.
+
+A construção desse foi bem simples, a "grande" dificuldade foi realizar as devidas configurações no [site do EmailJS](https://dashboard.emailjs.com/sign-in), depois disso bastou criar a função abaixo:
+#### Configurações
+<div className="width: 100%; display: flex; justify-content: center; align-items: center;">
+  <img alt="Configurações 1" src="https://github.com/user-attachments/assets/c88c3c46-5c29-443f-8805-f327a1066e73">
+  <img alt="Configurações 2" src="https://github.com/user-attachments/assets/4294353a-7316-4830-a848-e51ccb74d5e4">
+</div>
+
+#### Código
+```ts
+  // Importação:
+  import emailjs from "@emailjs/browser";
+
+  // O principal requisito é usar um useRef para referenciar o forms
+  // No caso também utilizei 3 useStates para verificar se os campos foram preenchidos, mas não é uma necessidade
+  function sendEmail(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (!form.current) {
+      console.error("Form element not found");
+      return;
+    }
+
+    if (!name || !email || !message) {
+      alert("Preencha os campos para entrar em contato!")
+      return
+    }
+
+    const formData = new FormData(form.current);
+    const formValues: Record<string, string> = {};
+
+    formData.forEach((value, key) => {
+      formValues[key] = value as string;
+    });
+
+    // Basta adicionar minha chave da API configurada no site
+    emailjs
+      .sendForm(process.env.NEXT_PUBLIC_SERVICE_ID as string, process.env.NEXT_PUBLIC_TEMPLATE_ID as string, form.current, {
+        publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY as string,
+        ...formValues,
+      })
+      .then(() => {
+        alert("Contato realizado!")
+        form?.current?.reset();
+        clearForm()
+      })
+      .catch((error) => {
+        alert("Erro ao realizar contato, tente novamente...")
+        form?.current?.reset();
+        clearForm()
+        console.error(error)
+      });
+  }
+```
+Com isso as informações do forms, também configuradas no site, conseguem ser lidas e então enviadas ao meu email!
 
 # Autores 🧑‍💼
 - [@Victor-Lis](https://www.linkedin.com/in/victor-lis-bronzo)
