@@ -43,6 +43,8 @@ Ser a marca líder em produtos para higiene feminina, reconhecida pela inovaçã
 ### Valores 🎖
 Nossos valores são: Cuidado, Inovação, Qualidade, Sustentabilidade e Empoderamento Feminino.
 
+<br>
+
 ### ⚠️ AVISO ⚠️
 A Care+ é apenas uma empresa fictícia, sendo assim não é uma empresa real, com isso toda sua construção de branding e postura como marca **NÃO** existem!
 
@@ -440,6 +442,8 @@ Com isso de maneira fácil consigo os dados formatados e prontos para serem util
 ### Perfil - /perfil 👥
 A rota realiza um reajuste de acordo com a sessão do user, se o usuário não estiver logado a página exibe um componente que pede o login dele, se estiver logado são exibidos seus dados. Mesmo não sendo uma funcionalidade exclusiva dessa rota, é destacável o uso do [Next-Auth](https://next-auth.js.org/) para permitir uma integração segura, robusta e fácil com os mais diversos modelos de OAuth 2.0, o escolhido para o caso foi o mais comum e presente no dia a dia das pessoas hoje em dia, o Google OAuth.
 
+<br>
+
 #### /perfil/page.tsx
 ```ts
 "use client"
@@ -460,8 +464,12 @@ export default function perfil() {
 }
 ```
 
+<br>
+
 #### WithSignIn - src/components/perfil/WithSignIn.tsx
 ![WithSignIn](https://github.com/user-attachments/assets/f180ae4b-0cef-4310-baeb-86b158196348)
+
+<br>
 
 #### NoSignIn - src/components/perfil/NoSignIn.tsx
 ![NoSignIn](https://github.com/user-attachments/assets/8d52746d-042b-41e4-9107-75972ede6f99)
