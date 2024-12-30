@@ -71,8 +71,7 @@ Construí a aplicação buscando trazer uma sensação de leveza e conforto para
 <br>  
 
 ## Database - Supabase 
-Para facilitar o entendimento do projeto deixo aqui o Schema do Banco de Dados construido através do Supabase, para facilitar o entendimento do Supabase compartilho também a [documentação dele]() e um PDF sobre de autoria própria.
-[Supabase.pdf](https://github.com/user-attachments/files/18278009/Supabase.pdf)
+Para facilitar o entendimento do projeto deixo aqui o Schema do Banco de Dados construido através do Supabase, para facilitar o entendimento do Supabase compartilho também a [documentação dele](https://supabase.com/) e um [PDF](https://github.com/user-attachments/files/18278009/Supabase.pdf) sobre de autoria própria.
 
 ### Schema
 ![Schema](https://github.com/user-attachments/assets/3ab3469f-47d5-48bd-b42f-d15eca86b474)
@@ -347,6 +346,170 @@ export default function Produto() {
   return <Loader/>
 }
 ```
+
+<br>
+<br>
+
+### Carrinho - /carrinho 🛒
+Na tela carrinho o principal destaque vai para a função em SQL 'get_user_cart', criada para conseguir correlacionar as informações das tabelas "produto" e "carrinho" na database, antes de implentar essa função a manipulação de dados era realizada no front-end, com a função responsável por isso tendo mais de 100 linhas (desde puxar os dados e então adaptar) além de uma queda de desempenho bem impactante, porém utilizando o incrível comando SQL "WITH()" foi possível deixar toda essa manipulação de dados em SQL e, portanto, tendo mais desempenho, deixo ela abaixo e seu uso:
+
+#### Função 'get_user_cart()' - Supabase
+```SQL
+
+WITH CarrinhoUsuario AS (
+  SELECT 
+    c.id,
+    c.amount,
+    c.final_price,
+    c.product_id,
+    c.user_email
+  FROM public.carrinho AS c
+  WHERE c.user_email = email_param
+),
+FormattedCart AS (
+  SELECT
+    c.id,
+    c.amount,
+    c.final_price,
+    c.product_id,
+    c.user_email,
+    json_build_object(
+      'id', p.id,
+      'created_at', p.created_at,
+      'name', p.name,
+      'price', p.price,
+      'description', p.description,
+      'image_id', p.image_id,
+      'image_url', p.image_url,
+      'categoria', p.categoria
+    ) AS produto
+  FROM CarrinhoUsuario c
+  INNER JOIN public.produto p ON c.product_id = p.id
+)
+SELECT json_agg(f.*)::JSONB
+FROM FormattedCart f;
+```
+
+#### Criando função que conecta ao Supabase - src/lib/supabase/getCartUserProduts.ts
+```ts
+import { supabase } from "./supabase";
+
+export async function getUserCartProducts({ email }: { email: string }) {
+  const { data, error } = await supabase.rpc("get_user_cart", {
+    email_param: email,
+  });
+  if (error) console.error(error);
+  return !!data ? data : []
+}
+``` 
+
+#### Chamando função que armazena os dados no Storage do Zustand - src/lib/zustand/productsInCart.ts
+```ts
+import { create } from "zustand";
+
+import type { FormattedCartItemType } from "@/@types/formattedCart";
+import type { ProductType } from "@/@types/product";
+import type { CartItemType } from "@/@types/cartItemType";
+import { getUserCartProducts } from "../supabase/getUserCartProducts";
+
+type FormattedProductsStore = {
+  formattedProducts: FormattedCartItemType[];
+  getFormattedProducts: (email: string) => Promise<boolean>;
+};
+
+export const useFormattedProductsStore = create<FormattedProductsStore>(
+  (set) => ({
+    formattedProducts: [],
+    getFormattedProducts: async (email) => {
+      const formattedProducts = await getUserCartProducts({email});
+      set(() => ({ formattedProducts }));
+      return true;
+    },
+  })
+);
+``` 
+Com isso de maneira fácil consigo os dados formatados e prontos para serem utilizados! 
+
+### Perfil - /perfil 👥
+A rota realiza um reajuste de acordo com a sessão do user, se o usuário não estiver logado a página exibe um componente que pede o login dele, se estiver logado são exibidos seus dados. Mesmo não sendo uma funcionalidade exclusiva dessa rota, é destacável o uso do [Next-Auth](https://next-auth.js.org/) para permitir uma integração segura, robusta e fácil com os mais diversos modelos de OAuth 2.0, o escolhido para o caso foi o mais comum e presente no dia a dia das pessoas hoje em dia, o Google OAuth.
+
+#### /perfil/page.tsx
+```ts
+"use client"
+
+import Loader from "@/components/global/Loader";
+import NoSignIn from "@/components/perfil/NoSignIn";
+import WithSignIn from "@/components/perfil/WithSignIn";
+import { useSession } from "next-auth/react";
+
+export default function perfil() {
+  const { data: session, status } = useSession();
+
+ return (
+  <div>
+    {status === "loading" ? <Loader/> : session?.user?.email ? <WithSignIn/> : <NoSignIn/>}
+  </div>
+ );
+}
+```
+
+#### WithSignIn - src/components/perfil/WithSignIn.tsx
+![WithSignIn](https://github.com/user-attachments/assets/f180ae4b-0cef-4310-baeb-86b158196348)
+
+#### NoSignIn - src/components/perfil/NoSignIn.tsx
+![NoSignIn](https://github.com/user-attachments/assets/8d52746d-042b-41e4-9107-75972ede6f99)
+
+<br>
+<br>
+
+## Instalação 📲
+Para instalar a aplicação em ambiente de desenvolvimento basta seguir o passo a passo abaixo:
+<br>
+
+**1- Com as dependências do git já presentes**
+```cmd
+  git clone https://github.com/Victor-Lis/CarePlus 
+```
+<br>
+
+**2- Com as dependências do npm já presentes**
+```cmd
+  cd CarePlus & npm i
+```
+<br>
+
+**3- Colar o arquivo .env na raiz do projeto e preencher o .env com suas credenciais**
+```dir
+  CarePlus/.env
+```
+```.env
+# EMAILJS
+NEXT_PUBLIC_SERVICE_ID=
+NEXT_PUBLIC_TEMPLATE_ID=
+NEXT_PUBLIC_PUBLIC_KEY=
+
+# NextAuth
+SECRET=
+NEXTAUTH_SECRET=
+NEXT_AUTH_URL=
+NEXT_PUBLIC_HOST_URL=
+NEXT_AUTH_SECRET=
+
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+
+# Google
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+```
+<br>
+
+**4- Agora basta rodar!**
+```cmd
+npm run dev
+```
+<br>
 
 <br>
 
