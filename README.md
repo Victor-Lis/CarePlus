@@ -68,6 +68,17 @@ Construí a aplicação buscando trazer uma sensação de leveza e conforto para
 | Sour Gummy       | [Google Fonts](https://fonts.google.com/specimen/Sour+Gummy?query=Sour+Gummy) |
 
 <br>
+<br>  
+
+## Database - Supabase 
+Para facilitar o entendimento do projeto deixo aqui o Schema do Banco de Dados construido através do Supabase, para facilitar o entendimento do Supabase compartilho também a [documentação dele]() e um PDF sobre de autoria própria.
+[Supabase.pdf](https://github.com/user-attachments/files/18278009/Supabase.pdf)
+
+### Schema
+![Schema](https://github.com/user-attachments/assets/3ab3469f-47d5-48bd-b42f-d15eca86b474)
+
+<br>
+<br>
 
 ## Resumo das Páginas
 
@@ -337,6 +348,7 @@ export default function Produto() {
 }
 ```
 
+<br>
 
 # Autores 🧑‍💼
 - [@Victor-Lis](https://www.linkedin.com/in/victor-lis-bronzo)
