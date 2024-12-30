@@ -48,7 +48,7 @@ export default function WithSignIn() {
         <p>É como se a gente criasse um espaço só seu, pensado especialmente para o seu bem-estar!</p>
         <p>Sua privacidade é muito importante para nós. Todas as informações que você compartilha são tratadas com o máximo cuidado e segurança.</p>
       </div>
-      <button type="button" className="bg-secondary-strong rounded uppercase text-tertiary px-4 py-2 gap-x-2 flex justify-center items-center">
+      <button type="button" className="bg-secondary-strong rounded uppercase text-tertiary px-4 py-2 gap-x-2 flex justify-center items-center" onClick={handleSignOut}>
         Sair
         <GoSignOut size={20} color="#d9e4fc"/>
       </button>
